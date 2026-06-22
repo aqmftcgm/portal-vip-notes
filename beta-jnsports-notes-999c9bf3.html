@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>江南体育 · 主题信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f9fc;
+      color: #1e2f3a;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* 主视觉 —— 蓝绿渐变卡片 */
+    .hero {
+      background: linear-gradient(145deg, #0b4f6c 0%, #1f7a8a 100%);
+      border-radius: 2.5rem 2.5rem 2rem 2rem;
+      padding: 2.8rem 2rem;
+      margin-bottom: 2.8rem;
+      color: white;
+      box-shadow: 0 12px 24px rgba(0, 50, 60, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -2rem;
+      bottom: -2rem;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      max-width: 80%;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 70%;
+      margin-top: 0.3rem;
+    }
+
+    .hero .tag {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      padding: 0.4rem 1.1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      display: inline-block;
+      width: fit-content;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin-top: 0.5rem;
+    }
+
+    /* 网格卡片区 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 40, 50, 0.06);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(15, 105, 120, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0, 70, 90, 0.10);
+      border-color: #2399aa30;
+    }
+
+    .card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      color: #1a7f8f;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #0b4f6c;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2c4450;
+      flex: 1;
+    }
+
+    .card .small-meta {
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: #568796;
+      border-top: 1px dashed #cde3ea;
+      padding-top: 0.8rem;
+    }
+
+    /* 自然段落 + 链接嵌入 */
+    .content-block {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 4px 12px rgba(0, 40, 50, 0.05);
+    }
+
+    .content-block h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #0b4f6c;
+      margin-bottom: 1rem;
+      border-left: 6px solid #1f9aaa;
+      padding-left: 1rem;
+    }
+
+    .content-block p {
+      margin-bottom: 1.2rem;
+      color: #1a2e39;
+    }
+
+    .content-block a {
+      color: #117a8f;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #9dcbd6;
+      transition: 0.15s;
+    }
+
+    .content-block a:hover {
+      color: #064c5a;
+      border-bottom-color: #064c5a;
+    }
+
+    .faq-mini {
+      background: #e8f3f7;
+      border-radius: 1.6rem;
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .faq-mini h4 {
+      font-size: 1.1rem;
+      color: #074f64;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    .faq-mini p {
+      font-size: 0.95rem;
+      color: #1c3b47;
+    }
+
+    .faq-mini small {
+      display: block;
+      margin-top: 0.8rem;
+      color: #54818e;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 1.2rem 0 0.5rem;
+      font-size: 0.85rem;
+      color: #4d7a88;
+      border-top: 1px solid #cde0e6;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      .hero { padding: 2rem 1.5rem; border-radius: 2rem; }
+      .hero h1 { font-size: 1.8rem; max-width: 100%; }
+      .hero p { max-width: 100%; font-size: 1rem; }
+      .grid { gap: 1.2rem; }
+      .content-block { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 主视觉 hero -->
+  <div class="hero">
+    <h1>江南 · 运动活力</h1>
+    <p>从山水街巷到球场跑道，运动成为日常的呼吸。江南体育专注提供场景化运动信息与交流空间。</p>
+    <div class="tag">⛰️ 主题 · 活力 · 自然</div>
+  </div>
+
+  <!-- 网格用途卡片 3枚 -->
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🏸</div>
+      <h3>场地与活动</h3>
+      <p>汇集江南地区各类运动场馆、户外路线与社群活动。从羽毛球馆到环湖跑团，快速找到身边的热力聚集点。</p>
+      <div class="small-meta">覆盖城市 · 持续更新</div>
+    </div>
+    <div class="card">
+      <div class="icon">📋</div>
+      <h3>运动指南</h3>
+      <p>针对不同季节与天气的实用贴士，以及入门级训练建议。无论新手还是爱好者，都能找到适合自己的节奏。</p>
+      <div class="small-meta">适合日常参考</div>
+    </div>
+    <div class="card">
+      <div class="icon">🧑‍🤝‍🧑</div>
+      <h3>同好交流</h3>
+      <p>基于兴趣的小组与话题讨论，鼓励线下相约，彼此激励。运动不只是锻炼，也是连接人与人的方式。</p>
+      <div class="small-meta">友善 · 自发组织</div>
+    </div>
+  </div>
+
+  <!-- 适合人群 + 自然链接段落 -->
+  <div class="content-block">
+    <h2>适合哪些人？</h2>
+    <p>如果你是住在江南或计划来此短居的年轻人，喜欢在周末找一条新骑行路线，或者在雨后打一场羽毛球，那么这里的内容很可能合你口味。上班族、学生、退休后仍爱活动的长辈，都可以找到对应的版块。所有信息都经过人工整理，不浮夸，只求实在。</p>
+    <p>若想了解更完整的平台内容，可以访问 <a href="https://beta-jnsports.com">江南体育</a>，那里有更细致的分类和社区动态。页面采用简洁卡片式布局，方便在手机上一目了然。</p>
+  </div>
+
+  <!-- 迷你 FAQ 摘要 -->
+  <div class="faq-mini">
+    <h4>🤔 常见疑问</h4>
+    <p><strong>内容来源可靠吗？</strong> 每篇场地指南或活动信息均由用户与编辑共同核实，并附有参考日期。遇到场地变更，也会及时标注。<br>
+    <strong>需要付费吗？</strong> 目前基础信息浏览完全免费，部分线下活动可能涉及场地费用，页面会提前说明。</p>
+    <small>—— 更多问题可到平台内「帮助」板块查看。</small>
+  </div>
+
+  <!-- 附加提示段落 保持平实 -->
+  <div style="background: #ffffffd0; border-radius: 1.5rem; padding: 1.4rem 1.8rem; margin-bottom: 2rem; border-left: 5px solid #1f9aaa;">
+    <p style="font-size: 0.95rem; color: #194450;">💡 提示：运动前请根据自身情况做好准备，留意天气与场地公告。信息仅供参阅，不构成专业医疗或训练建议。</p>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    江南体育 · 信息卡片介绍 · 2025
+  </div>
+</div>
+</body>
+</html>
